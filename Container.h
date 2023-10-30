@@ -44,7 +44,7 @@ public:
      * Установка флага о появлении изменений
      */
     void setChanges(){
-        std::lock_guard<std::mutex> locker(changesMU);
+        std::lock_guard<std::mutex> locker(vectorMU);
         changes = true;
     }
 
@@ -52,7 +52,6 @@ public:
      * Снятие флага о появлении изменений
      */
     void offChanges(){
-        std::lock_guard<std::mutex> locker(changesMU);
         changes = false;
     }
 
@@ -77,6 +76,7 @@ public:
             func(it.first, it.second);
         }
         values.clear();
+        offChanges();
     }
 
     bool empty(){
@@ -94,7 +94,6 @@ public:
 private:
     std::vector<std::pair<int, int>> values;
     std::mutex vectorMU;
-    std::mutex changesMU;
     bool changes = false;
     std::string name;
 

@@ -33,7 +33,6 @@ void DIOdriver::handleChanges(){
             default: std::cout << "handleChanges: Wrong DO value" << std::endl;
         }
     });
-    DOvector.offChanges();
     writeToHardware();
     }
 
@@ -59,7 +58,6 @@ void DIOdriver::DIpolling(){
             }
         diStatePrevious = diState;
         DIvector.setChanges();
-
         }
     }
 

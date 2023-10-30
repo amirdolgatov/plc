@@ -34,7 +34,6 @@ DOvector(DOvector_), DIvector(DIvector_), doAddresses(doAddresses_), diAddresses
 }
 
 void ModbusClient::modbusPolling(){
-    std::cout << "Modbus Polling  "<< std::endl;
     int rc = 0;
 
     if(DIvector.isChanged()){
@@ -57,7 +56,6 @@ void ModbusClient::modbusPolling(){
             previousDOState[numbOfOutput] = value;
         }
     }
-
     if (!DOvector.empty())
         DOvector.setChanges(); ///
 }
@@ -68,6 +66,5 @@ void ModbusClient::handleDIsignal(){
         if (diAddresses.find(diNumb) != diAddresses.end())
             modbus_write_bit(ctx, diAddresses[diNumb], value);  /// запись необходимо производить по адресам указанным в конфиг. файле
     });
-    DIvector.offChanges();
 }
 

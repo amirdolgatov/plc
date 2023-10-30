@@ -25,6 +25,7 @@ int main(int argc, char *argv[]) {
 
     ModbusClient client = ModbusClient(settings.ip, settings.tcpPort, DOvector, DIvector, doAddresses, diAddresses);
     DIOdriver driver = DIOdriver(8, DOvector, DIvector);
+
     std::thread th1([&]() {
         for (;;) {
             usleep(100000);
@@ -40,6 +41,7 @@ int main(int argc, char *argv[]) {
     });
     th2.detach();
     getchar();
+
 
     return 0;
 }
